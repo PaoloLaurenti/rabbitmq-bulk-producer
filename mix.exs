@@ -8,7 +8,11 @@ defmodule RabbitmqBulkProducer.MixProject do
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases()
+      aliases: aliases(),
+      dialyzer: [
+        plt_add_deps: :app_tree,
+        plt_add_apps: [:mix]
+      ]
     ]
   end
 
