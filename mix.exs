@@ -7,7 +7,8 @@ defmodule RabbitmqBulkProducer.MixProject do
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      aliases: aliases()
     ]
   end
 
@@ -22,8 +23,26 @@ defmodule RabbitmqBulkProducer.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:amqpx, "~> 5.8"},
+      {:credo, "~> 1.6", only: [:dev, :test]},
+      {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
+      {:nimble_csv, "~> 1.2"}
+    ]
+  end
+
+  defp aliases do
+    [
+      dep_check: ["deps.unlock --check-unused"],
+      check: [
+        "compile --all-warnings --ignore-module-conflict --warnings-as-errors --debug-info",
+        "format --check-formatted mix.exs \"lib/**/*.{ex,exs}\" \"test/**/*.{ex,exs}\" \"priv/**/*.{ex,exs}\" \"config/**/*.{ex,exs}\"",
+        "deps.unlock --check-unused",
+        "credo -a --strict",
+        "dialyzer"
+      ],
+      "format.all": [
+        "format mix.exs \"lib/**/*.{ex,exs}\" \"test/**/*.{ex,exs}\" \"priv/**/*.{ex,exs}\" \"config/**/*.{ex,exs}\""
+      ]
     ]
   end
 end
