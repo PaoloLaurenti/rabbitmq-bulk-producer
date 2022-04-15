@@ -26,3 +26,4 @@ rabbitmq_bulk_producer-*.tar
 /tmp/
 
 .elixir_ls
+/rabbitmq_bulk_producer

@@ -12,7 +12,8 @@ defmodule RabbitmqBulkProducer.MixProject do
       dialyzer: [
         plt_add_deps: :app_tree,
         plt_add_apps: [:mix]
-      ]
+      ],
+      escript: [main_module: Commandline.CLI]
     ]
   end
 
@@ -30,7 +31,8 @@ defmodule RabbitmqBulkProducer.MixProject do
       {:amqpx, "~> 5.8"},
       {:credo, "~> 1.6", only: [:dev, :test]},
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
-      {:nimble_csv, "~> 1.2"}
+      {:nimble_csv, "~> 1.2"},
+      {:poison, "~> 5.0"}
     ]
   end
 

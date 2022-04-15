@@ -4,16 +4,17 @@ defmodule RabbitmqBulkProducer.Application do
   @moduledoc false
 
   use Application
+  alias Amqpx.Helper
 
   @impl true
   def start(_type, _args) do
     children = [
-      # Starts a worker by calling: RabbitmqBulkProducer.Worker.start_link(arg)
-      # {RabbitmqBulkProducer.Worker, arg}
+      Helper.manager_supervisor_configuration(Application.get_env(:rabbitmq_bulk_producer, :amqp_connection)),
+      Helper.producer_supervisor_configuration(
+        Application.get_env(:rabbitmq_bulk_producer, :producer)
+      )
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: RabbitmqBulkProducer.Supervisor]
     Supervisor.start_link(children, opts)
   end

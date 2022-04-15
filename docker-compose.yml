@@ -1,0 +1,22 @@
+version: '2'
+services:
+  rabbitmq_bulk_producer:
+    build: .
+    volumes:
+      - .:/code
+    depends_on:
+      - rabbit
+    links:
+      - rabbit
+    environment:
+      ERL_AFLAGS: "-kernel shell_history enabled"
+    entrypoint: ["./wait-for-it.sh", "rabbit:15672", "--", "bash", "./entrypoint"]
+  rabbit:
+     image: rabbitmq:3-management
+     environment:
+       RABBITMQ_DEFAULT_VHOST: '/'
+       RABBITMQ_DEFAULT_USER: 'guest'
+       RABBITMQ_DEFAULT_PASS: 'guest'
+     ports:
+       - '15680:15672'
+       - '5680:5672'

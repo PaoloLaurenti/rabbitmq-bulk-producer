@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+mix local.hex --force
+mix local.rebar --force
+mix deps.get
+mix escript.build
+./rabbitmq_bulk_producer -f priv/messages.csv -r test-bulk
