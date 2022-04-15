@@ -9,7 +9,9 @@ defmodule RabbitmqBulkProducer.Application do
   @impl true
   def start(_type, _args) do
     children = [
-      Helper.manager_supervisor_configuration(Application.get_env(:rabbitmq_bulk_producer, :amqp_connection)),
+      Helper.manager_supervisor_configuration(
+        Application.get_env(:rabbitmq_bulk_producer, :amqp_connection)
+      ),
       Helper.producer_supervisor_configuration(
         Application.get_env(:rabbitmq_bulk_producer, :producer)
       )

@@ -1,8 +1,10 @@
 NimbleCSV.define(MyParser, escape: "\"")
 
-alias Amqpx.Gen.Producer
-
 defmodule RabbitmqBulkProducer.Bulk do
+  @moduledoc false
+
+  alias Amqpx.Gen.Producer
+
   @spec run(file_path :: String.t(), exchange :: String.t(), routing_key :: String.t()) :: :ok
   def run(file_path, exchange, routing_key) do
     file_path

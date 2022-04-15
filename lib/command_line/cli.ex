@@ -1,4 +1,6 @@
 defmodule Commandline.CLI do
+  @moduledoc false
+
   alias RabbitmqBulkProducer.Bulk
 
   @spec main([String.t()]) :: :ok
@@ -26,7 +28,7 @@ defmodule Commandline.CLI do
     :ok
   end
 
-  defp print_usage() do
+  defp print_usage do
     IO.puts("Usage: rabbitmq_bulk_producer [OPTIONS]...")
     IO.puts(~s/Options:
 -f  --file        PATH      Path of the csv file containing messages to publish
